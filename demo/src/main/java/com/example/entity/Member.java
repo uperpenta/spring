@@ -19,7 +19,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private Long LEI;
+    private long LEI;
     private String legalName;
     private String description;
     private String adress;

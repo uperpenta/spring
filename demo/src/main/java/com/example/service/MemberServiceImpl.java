@@ -63,7 +63,7 @@ public class MemberServiceImpl implements MemberService {
             return result.get();
 
         }else {
-            throw new ResourceNotFoundException("member", "id", id);
+            throw new ResourceNotFoundException("Member", "id", id);
         }
     }
     

@@ -5,7 +5,6 @@ import java.util.List;
 import com.example.entity.Member;
 
 
-
 public interface MemberService {
     List<Member> getAllMembers();
 

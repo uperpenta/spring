@@ -17,33 +17,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.MemberDTO;
+import com.example.dto.VenueDTO;
 import com.example.entity.Member;
-import com.example.service.MemberService;
+import com.example.service.VenueService;
 
 @RestController
-@RequestMapping("/api/members")
-public class MemberController {
+@RequestMapping("/api/venues")
+public class VenueController {
+    
 
     private final ModelMapper modelMapper;
 
-    private final MemberService memberService;
+    private final VenueService venueService;
 
     @Autowired
-    public MemberController(MemberService memberService, ModelMapper modelMapper) {
+    public VenueController(ModelMapper modelMapper, VenueService venueService) {
         super();
-        this.memberService = memberService;
         this.modelMapper = modelMapper;
+        this.venueService = venueService;
     }
 
     @GetMapping
-    public List<MemberDTO> getAllMembers() {
-        return memberService.getAllMembers().stream().map(member -> modelMapper.map(member, MemberDTO.class))
+    public List<VenueDTO> getAllVenues() {
+        return venueService.getAllVenues().stream().map(venue -> modelMapper.map(venue, VenueDTO.class))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MemberDTO> getMemberById(@PathVariable(name = "id") long id) {
-        Member member = memberService.getMemberById(id);
+    public ResponseEntity<VenueDTO> getVenueById(@PathVariable(name = "id") long id) {
+        Venue venue = venueService.getVenueById(id);
 
         MemberDTO memberResponse = modelMapper.map(member, MemberDTO.class);
 
@@ -81,4 +83,5 @@ public class MemberController {
         return ResponseEntity.ok("Member with id" + id + " has been deleted.");
     }
 
+    
 }

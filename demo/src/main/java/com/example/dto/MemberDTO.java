@@ -8,9 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDTO {
-    private Long id;
-    private String LEI;
+    private long id;
+    private Long LEI;
     private String legalName;
     private String description;
     private String adress;
+
+    public long getId(){
+        return id;
+    }
 }
