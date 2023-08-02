@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dto.MemberDTO;
+
 import com.example.dto.VenueDTO;
-import com.example.entity.Member;
+import com.example.entity.Venue;
 import com.example.service.VenueService;
 
 @RestController
@@ -47,40 +47,40 @@ public class VenueController {
     public ResponseEntity<VenueDTO> getVenueById(@PathVariable(name = "id") long id) {
         Venue venue = venueService.getVenueById(id);
 
-        MemberDTO memberResponse = modelMapper.map(member, MemberDTO.class);
+        VenueDTO venueResponse = modelMapper.map(venue, VenueDTO.class);
 
-        return ResponseEntity.ok().body(memberResponse);
+        return ResponseEntity.ok().body(venueResponse);
     }
 
     @PostMapping
-    public ResponseEntity<MemberDTO> createMember(@RequestBody MemberDTO memberDTO) {
+    public ResponseEntity<VenueDTO> createVenue(@RequestBody VenueDTO venueDTO) {
 
-        Member memberRequest = modelMapper.map(memberDTO, Member.class);
+        Venue venueRequest = modelMapper.map(venueDTO, Venue.class);
    
-        Member member = memberService.createMember(memberRequest);
+        Venue venue = venueService.createVenue(venueRequest);
         
-        MemberDTO memberResponse = modelMapper.map(member, MemberDTO.class);
+        VenueDTO venueResponse = modelMapper.map(venue, VenueDTO.class);
         
-        return new ResponseEntity<MemberDTO>(memberResponse, HttpStatus.CREATED);
+        return new ResponseEntity<VenueDTO>(venueResponse, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MemberDTO> updateMember(@PathVariable long id, @RequestBody MemberDTO memberDTO) {
+    public ResponseEntity<VenueDTO> updateVenue(@PathVariable long id, @RequestBody VenueDTO venueDTO) {
 
-        Member memberRequest = modelMapper.map(memberDTO, Member.class);
+        Venue venueRequest = modelMapper.map(venueDTO, Venue.class);
 
-        Member member = memberService.updateMember(id, memberRequest);
+        Venue venue = venueService.updateVenue(id, venueRequest);
 
-        MemberDTO memberResponse = modelMapper.map(member, MemberDTO.class);
+        VenueDTO venueResponse = modelMapper.map(venue, VenueDTO.class);
 
-        return ResponseEntity.ok().body(memberResponse);
+        return ResponseEntity.ok().body(venueResponse);
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteMember(@PathVariable(name = "id") long id) {
-        memberService.deleteMember(id);
-        return ResponseEntity.ok("Member with id" + id + " has been deleted.");
+    public ResponseEntity<String> deleteVenue(@PathVariable(name = "id") long id) {
+        venueService.deleteVenue(id);
+        return ResponseEntity.ok("Venue with id" + id + " has been deleted.");
     }
 
     

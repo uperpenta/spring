@@ -7,7 +7,7 @@ import com.example.entity.Venue;
 public interface VenueService {
     List<Venue> getAllVenues();
 
-    Venue creatVenue(Venue venue);
+    Venue createVenue(Venue venue);
 
     Venue updateVenue(long id, Venue venue);
 
