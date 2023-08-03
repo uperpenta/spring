@@ -2,18 +2,18 @@ package com.example.service;
 
 import java.util.List;
 
-import com.example.entity.Member;
+import com.example.dto.MemberDTO;
 
 
 public interface MemberService {
-    List<Member> getAllMembers();
+    List<MemberDTO> getAllMembers();
 
-    Member createMember(Member member);
+    MemberDTO createMember(MemberDTO memberDTO);
 
-    Member updateMember(long id, Member member);
+    MemberDTO updateMember(long id, MemberDTO memberDTO);
 
     void deleteMember(long id);
 
-    Member getMemberById(long id);
+    List<MemberDTO> getMemberById(long id);
 
 }

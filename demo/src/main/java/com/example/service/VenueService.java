@@ -2,16 +2,16 @@ package com.example.service;
 
 import java.util.List;
 
-import com.example.entity.Venue;
+import com.example.dto.VenueDTO;
 
 public interface VenueService {
-    List<Venue> getAllVenues();
+    List<VenueDTO> getAllVenues();
 
-    Venue createVenue(Venue venue);
+    VenueDTO createVenue(VenueDTO venueDTO);
 
-    Venue updateVenue(long id, Venue venue);
+    VenueDTO updateVenue(long id, VenueDTO venueDTO);
 
     void deleteVenue(long id);
 
-    Venue getVenueById(long id);
+    List<VenueDTO> getVenueById(long id);
 }

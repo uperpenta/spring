@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MemberDTO {
     private long id;
-    private Long LEI;
+    private long LEI;
     private String legalName;
     private String description;
     private String adress;
 
-    public long getId(){
-        return id;
-    }
+    private long venueId;
 }

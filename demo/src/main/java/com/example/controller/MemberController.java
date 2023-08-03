@@ -1,9 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,62 +15,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.MemberDTO;
-import com.example.entity.Member;
 import com.example.service.MemberService;
 
 @RestController
 @RequestMapping("/api/members")
 public class MemberController {
 
-    private final ModelMapper modelMapper;
 
     private final MemberService memberService;
 
     @Autowired
-    public MemberController(MemberService memberService, ModelMapper modelMapper) {
+    public MemberController(MemberService memberService) {
         super();
         this.memberService = memberService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping
     public List<MemberDTO> getAllMembers() {
-        return memberService.getAllMembers().stream().map(member -> modelMapper.map(member, MemberDTO.class))
-                .collect(Collectors.toList());
+        return memberService.getAllMembers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MemberDTO> getMemberById(@PathVariable(name = "id") long id) {
-        Member member = memberService.getMemberById(id);
-
-        MemberDTO memberResponse = modelMapper.map(member, MemberDTO.class);
-
-        return ResponseEntity.ok().body(memberResponse);
+    public ResponseEntity<List<MemberDTO>> getMemberById(@PathVariable(name = "id") long id) {
+        List<MemberDTO> member = memberService.getMemberById(id);
+        
+        return ResponseEntity.ok().body(member);
     }
 
     @PostMapping
     public ResponseEntity<MemberDTO> createMember(@RequestBody MemberDTO memberDTO) {
-
-        Member memberRequest = modelMapper.map(memberDTO, Member.class);
-   
-        Member member = memberService.createMember(memberRequest);
-        
-        MemberDTO memberResponse = modelMapper.map(member, MemberDTO.class);
-        
-        return new ResponseEntity<MemberDTO>(memberResponse, HttpStatus.CREATED);
+        MemberDTO createdMember=memberService.createMember(memberDTO);
+        return new ResponseEntity<MemberDTO>(createdMember, HttpStatus.CREATED);
+ 
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MemberDTO> updateMember(@PathVariable long id, @RequestBody MemberDTO memberDTO) {
 
-        Member memberRequest = modelMapper.map(memberDTO, Member.class);
+        MemberDTO member = memberService.updateMember(id, memberDTO);
 
-        Member member = memberService.updateMember(id, memberRequest);
-
-        MemberDTO memberResponse = modelMapper.map(member, MemberDTO.class);
-
-        return ResponseEntity.ok().body(memberResponse);
-
+        return ResponseEntity.ok().body(member);
     }
 
     @DeleteMapping("/{id}")
