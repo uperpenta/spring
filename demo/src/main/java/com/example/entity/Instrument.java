@@ -1,7 +1,5 @@
 package com.example.entity;
 
-import java.sql.Date;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,11 +20,11 @@ public class Instrument {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    private String ISIN;
+    private long ISIN;
     private String currency;
     private String type;
     private String description;
-    private Date effectiveDate;
+    private String effectiveDate;
     private String status;
 
 
